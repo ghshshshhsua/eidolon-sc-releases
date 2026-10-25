@@ -2,13 +2,13 @@
   "schema": 1,
   "platforms": {
     "android": {
-      "version": "1.3.0",
-      "versionCode": 130,
-      "tag": "v1.3.0",
-      "asset": "Eidolon-SC-Android-1.3.0.apk",
-      "size": 1952078157,
-      "sha256": "263ad5517419079adab9458025eafb39266c32aa3a29dea1572e98e6aa00af8c",
-      "notes": "新增云端语义检索：沿用聊天 API 或专用重排 API；失败时使用快速关键词，不加载本地检索模型。修复麦克风无反馈：显示权限及服务错误、支持重试、离线语言失败回退系统默认识别，并新增云端语音识别入口。"
+      "version": "1.4.0",
+      "versionCode": 140,
+      "tag": "v1.4.0",
+      "asset": "Eidolon-SC-Android-1.4.0.apk",
+      "size": 2016418850,
+      "sha256": "061a5d159caae530bc78bbd23baebbcf1a78cea99a3ef33e1eb5b713a5fa8245",
+      "notes": "新增应用内离线中文语音识别，不依赖系统服务；系统识别缺失时中文自动使用内置模型。修复云端检索状态误报，官方 DeepSeek 检索关闭思考并启用 JSON，新增完整检索测试和具体失败原因。"
     },
     "windows": {
       "version": "0.7.1",
