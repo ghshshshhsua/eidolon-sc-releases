@@ -2,13 +2,13 @@
   "schema": 1,
   "platforms": {
     "android": {
-      "version": "1.4.0",
-      "versionCode": 140,
-      "tag": "v1.4.0",
-      "asset": "Eidolon-SC-Android-1.4.0.apk",
+      "version": "1.4.1",
+      "versionCode": 141,
+      "tag": "v1.4.1",
+      "asset": "Eidolon-SC-Android-1.4.1.apk",
       "size": 2016418850,
-      "sha256": "061a5d159caae530bc78bbd23baebbcf1a78cea99a3ef33e1eb5b713a5fa8245",
-      "notes": "新增应用内离线中文语音识别，不依赖系统服务；系统识别缺失时中文自动使用内置模型。修复云端检索状态误报，官方 DeepSeek 检索关闭思考并启用 JSON，新增完整检索测试和具体失败原因。"
+      "sha256": "0d74da40356f0c0d3d007486cff62337f62e4e80c72895be2809f4017b11cd27",
+      "notes": "修复手机检查更新 HTTP 403：优先读取公开版本文件，API 作为备用并遵守限流等待；更新失败时仍可手动打开发布页。修复失败被缓存一天及检查过程缺少反馈的问题。"
     },
     "windows": {
       "version": "0.7.1",
