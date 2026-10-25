@@ -1,0 +1,31 @@
+# Runtime and private information
+**/data/
+**/.env*
+**/local.properties
+**/runtime.json
+**/*connection.json
+**/preferences.json
+**/browser/
+**/android-signing/
+*.p12
+*.jks
+*.keystore
+*.log
+*.pyc
+*.tsbuildinfo
+# Dependencies, models and generated output
+**/node_modules/
+**/.venv/
+**/__pycache__/
+**/.gradle*/
+**/.cxx/
+**/build/
+**/.next/
+*.gguf
+*.onnx
+*.aar
+*.so
+*.apk
+*.zip
+*.bundle
+*.db
