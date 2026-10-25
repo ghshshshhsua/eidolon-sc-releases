@@ -2,20 +2,20 @@
   "schema": 1,
   "platforms": {
     "android": {
-      "version": "1.2.0",
-      "versionCode": 120,
-      "tag": "v1.2.0",
-      "asset": "Eidolon-SC-Android-1.2.0.apk",
+      "version": "1.2.1",
+      "versionCode": 121,
+      "tag": "v1.2.1",
+      "asset": "Eidolon-SC-Android-1.2.1.apk",
       "size": 1952069965,
-      "sha256": "91f81b3e55bdf3fbff67b2e7e268eb313d559e2d25f1a268edbba7048379474c",
-      "notes": "新增关于页面更新检查、每天一次可关闭的启动检查和新版提醒。更新检查不发送聊天内容、密钥或设备标识；移除本机编译路径。"
+      "sha256": "c1a41560554895e96230f17dd17d12a85b7f5e14cc96f79843a5cc161408e640",
+      "notes": "新增关于页面更新检查、每天一次可关闭的启动检查和新版提醒；修复部分网络下更新入口超时。更新检查不发送聊天内容、密钥或设备标识；移除本机编译路径。"
     },
     "windows": {
-      "version": "0.7.0",
-      "tag": "v1.2.0",
-      "asset": "Eidolon-SC-Windows-0.7.0-update.zip",
-      "size": 37329,
-      "sha256": "797fa55c93f4b72ae108073e1f67fa7e73aff477364955d3429c0e011f1f726d",
+      "version": "0.7.1",
+      "tag": "v1.2.1",
+      "asset": "Eidolon-SC-Windows-0.7.1-update.zip",
+      "size": 37343,
+      "sha256": "8b166dc4edd31c8018e74a7d8ff6b90b5129f7cdcbdf18da2003c9c1c8bf29b4",
       "notes": "新增连接设置中的更新检查与版本下载入口。本文件是已有 Windows 本地版的补丁；退出应用后覆盖 desktop 和 package.json，保留 data 与本机配置。"
     }
   }
