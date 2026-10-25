@@ -2,13 +2,13 @@
   "schema": 1,
   "platforms": {
     "android": {
-      "version": "1.2.1",
-      "versionCode": 121,
-      "tag": "v1.2.1",
-      "asset": "Eidolon-SC-Android-1.2.1.apk",
-      "size": 1952069965,
-      "sha256": "c1a41560554895e96230f17dd17d12a85b7f5e14cc96f79843a5cc161408e640",
-      "notes": "新增关于页面更新检查、每天一次可关闭的启动检查和新版提醒；修复部分网络下更新入口超时。更新检查不发送聊天内容、密钥或设备标识；移除本机编译路径。"
+      "version": "1.3.0",
+      "versionCode": 130,
+      "tag": "v1.3.0",
+      "asset": "Eidolon-SC-Android-1.3.0.apk",
+      "size": 1952078157,
+      "sha256": "263ad5517419079adab9458025eafb39266c32aa3a29dea1572e98e6aa00af8c",
+      "notes": "新增云端语义检索：沿用聊天 API 或专用重排 API；失败时使用快速关键词，不加载本地检索模型。修复麦克风无反馈：显示权限及服务错误、支持重试、离线语言失败回退系统默认识别，并新增云端语音识别入口。"
     },
     "windows": {
       "version": "0.7.1",
