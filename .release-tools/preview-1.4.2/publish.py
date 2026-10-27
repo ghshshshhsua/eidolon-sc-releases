@@ -47,7 +47,9 @@ def run():
     assert os.environ.get('GITHUB_REF') == 'refs/heads/codex/publish-1.4.2-preview', 'Unexpected branch context'
     repo = api('repos/' + REPO)
     print('Repository checks: ' + json.dumps({'full_name': repo.get('full_name'), 'private': repo.get('private'), 'permissions': repo.get('permissions')}), flush=True)
-    assert repo['full_name'] == REPO and not repo['private'] and repo['permissions']['push'], 'Repository identity, visibility or push permission check failed'
+    assert repo['full_name'] == REPO and not repo['private'], 'Repository identity or visibility check failed'
+    # Installation tokens use contents permissions, not collaborator-role flags.
+    # GitHub enforces contents:write on the release mutation endpoints.
     stable_before = api('repos/' + REPO + '/contents/updates/stable.json')['sha']
     read = gh('api', f'repos/{REPO}/releases/tags/{TAG}', check=False)
     if read.returncode:
@@ -92,7 +94,15 @@ if __name__ == '__main__':
     try:
         context = api('repos/' + REPO)
         print('Publication context: ' + json.dumps({'repository': os.environ.get('GITHUB_REPOSITORY'), 'ref': os.environ.get('GITHUB_REF'), 'permissions': context.get('permissions')}), flush=True)
-        assert context['permissions']['push'], 'Preflight push permission check failed'
+        assert context['full_name'] == REPO and not context['private'], 'Unexpected repository target'
+        assert os.environ.get('GITHUB_REPOSITORY') == REPO
+        assert os.environ.get('GITHUB_REF') == 'refs/heads/codex/publish-1.4.2-preview'
+        existing = gh('api', f'repos/{REPO}/releases/tags/{TAG}', check=False)
+        if existing.returncode:
+            if '404' not in existing.stderr:
+                raise RuntimeError(existing.stderr)
+            gh('release', 'create', TAG, '--repo', REPO, '--draft', '--prerelease', '--latest=false', '--target', context['default_branch'], '--title', 'Eidolon SC · Android 1.4.2-preview.1 独立测试版', '--notes-file', str(ROOT / 'RELEASE-NOTES.md'))
+            print('Preview draft created; release write access verified', flush=True)
         reconstruct()
         run()
     except Exception as exc:
