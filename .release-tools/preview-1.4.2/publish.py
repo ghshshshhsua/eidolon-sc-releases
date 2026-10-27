@@ -6,6 +6,7 @@ import subprocess
 import shutil
 from reconstruct_public import reconstruct
 import sys
+import traceback
 
 ROOT = Path(__file__).resolve().parent
 GH = Path(shutil.which('gh') or '/usr/bin/gh')
@@ -42,10 +43,11 @@ def run():
         assert p.stat().st_size == e['size'] and sha(p) == e['sha256'], e['name']
     expected = {e['name']: {'size': e['size'], 'digest': 'sha256:' + e['sha256']} for e in entries}
     expected['SHA256.json'] = {'size': (STAGING / 'SHA256.json').stat().st_size, 'digest': 'sha256:' + sha(STAGING / 'SHA256.json')}
-    assert os.environ.get('GITHUB_REPOSITORY') == REPO
-    assert os.environ.get('GITHUB_REF') == 'refs/heads/codex/publish-1.4.2-preview'
+    assert os.environ.get('GITHUB_REPOSITORY') == REPO, 'Unexpected repository context'
+    assert os.environ.get('GITHUB_REF') == 'refs/heads/codex/publish-1.4.2-preview', 'Unexpected branch context'
     repo = api('repos/' + REPO)
-    assert repo['full_name'] == REPO and not repo['private'] and repo['permissions']['push']
+    print('Repository checks: ' + json.dumps({'full_name': repo.get('full_name'), 'private': repo.get('private'), 'permissions': repo.get('permissions')}), flush=True)
+    assert repo['full_name'] == REPO and not repo['private'] and repo['permissions']['push'], 'Repository identity, visibility or push permission check failed'
     stable_before = api('repos/' + REPO + '/contents/updates/stable.json')['sha']
     read = gh('api', f'repos/{REPO}/releases/tags/{TAG}', check=False)
     if read.returncode:
@@ -88,8 +90,12 @@ def run():
 
 if __name__ == '__main__':
     try:
+        context = api('repos/' + REPO)
+        print('Publication context: ' + json.dumps({'repository': os.environ.get('GITHUB_REPOSITORY'), 'ref': os.environ.get('GITHUB_REF'), 'permissions': context.get('permissions')}), flush=True)
+        assert context['permissions']['push'], 'Preflight push permission check failed'
         reconstruct()
         run()
     except Exception as exc:
-        print('Publication stopped: ' + str(exc), file=sys.stderr)
+        location = traceback.extract_tb(exc.__traceback__)[-1]
+        print('Publication stopped: ' + type(exc).__name__ + ': ' + str(exc) + ' at ' + str(location.lineno), file=sys.stderr)
         sys.exit(1)
