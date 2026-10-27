@@ -1,0 +1,14 @@
+{
+  "version": "1.4.2-preview.1",
+  "versionCode": 142,
+  "package": "local.eidolon.sc.android.preview",
+  "label": "Eidolon SC 测试",
+  "file": "Eidolon-SC-Android-1.4.2-preview.1.apk",
+  "size": 269372329,
+  "sha256": "ae1bf28c57f5d317e0e3e08331323440b07e3aab99c1b41bc47017427afff23b",
+  "signerSha256": "4c7ab53572c7ecc4b76517edf404a834bc955bd0b8bf9d5296a868e6045b1c31",
+  "originalAppUpgradeCompatible": false,
+  "installAlongsideOriginal": true,
+  "deviceTested": false,
+  "sourceCommit": "91ce558753904756eea471717f8afb8e990a3167"
+}

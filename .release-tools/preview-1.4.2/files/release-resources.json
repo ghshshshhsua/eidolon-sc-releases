@@ -1,0 +1,80 @@
+{
+  "version": "1.4.2",
+  "status": "unsigned-not-published",
+  "sourceCommit": "87849915235c6a8d98a957257888426ba04ac1b4",
+  "files": [
+    {
+      "file": "eidolon-models-judge-b3f7bd777fbd.zip",
+      "size": 1359320739,
+      "sha256": "4b3763bb1b24bf0187dde4105fbe4f7f2b58ff551f3e8a09e964636487ab3b4b",
+      "parts": [
+        {
+          "file": "eidolon-models-judge-b3f7bd777fbd.zip.part01",
+          "size": 471859200,
+          "sha256": "760b8ce609f721216acbbc0c00552d0d7f81a7437f5563c6cd1bd6aacd0bc881"
+        },
+        {
+          "file": "eidolon-models-judge-b3f7bd777fbd.zip.part02",
+          "size": 471859200,
+          "sha256": "1a09cdb16c5f7a21734b88b9a28669c06ad910e0b49f0882e7b7e98ccab38110"
+        },
+        {
+          "file": "eidolon-models-judge-b3f7bd777fbd.zip.part03",
+          "size": 415602339,
+          "sha256": "f39333e68d9a99cca62d40f156cca7c4252f8da99a1c8498787d1387063ca584"
+        }
+      ]
+    },
+    {
+      "file": "eidolon-models-retrieval-5d7233bc58fc.zip",
+      "size": 345156307,
+      "sha256": "ae2c513ff98e621290ddaa3e65b55d3f8deaba07a4cdccfe65e4a431f457baa6",
+      "parts": [
+        {
+          "file": "eidolon-models-retrieval-5d7233bc58fc.zip",
+          "size": 345156307,
+          "sha256": "ae2c513ff98e621290ddaa3e65b55d3f8deaba07a4cdccfe65e4a431f457baa6"
+        }
+      ]
+    },
+    {
+      "file": "eidolon-models-speech-59c5055a3322.zip",
+      "size": 43939707,
+      "sha256": "e63a9b25236399b7003501d5e078841759d998f84708b1c5ed6136ab1731b63f",
+      "parts": [
+        {
+          "file": "eidolon-models-speech-59c5055a3322.zip",
+          "size": 43939707,
+          "sha256": "e63a9b25236399b7003501d5e078841759d998f84708b1c5ed6136ab1731b63f"
+        }
+      ]
+    },
+    {
+      "file": "Eidolon-SC-1.4.2-corresponding-source.zip",
+      "size": 1798181419,
+      "sha256": "dd723f25548f0b46dde0b30eb621b859db7109a4f84b2045c6da9a5516e0395c",
+      "parts": [
+        {
+          "file": "Eidolon-SC-1.4.2-corresponding-source.zip.part01",
+          "size": 471859200,
+          "sha256": "9bcd1e90067b07f128086fc746d24f0df2f8cde04c17a58a97ec50360f6d3d5b"
+        },
+        {
+          "file": "Eidolon-SC-1.4.2-corresponding-source.zip.part02",
+          "size": 471859200,
+          "sha256": "c4faeb3d759f21d0abeb2dbf0e55c1d71cec2d589215d0c75c78abf808dac476"
+        },
+        {
+          "file": "Eidolon-SC-1.4.2-corresponding-source.zip.part03",
+          "size": 471859200,
+          "sha256": "7219c94a01b0928ba5f78d1ec72756b9b3e67c4b58b278d88a297b62457583c1"
+        },
+        {
+          "file": "Eidolon-SC-1.4.2-corresponding-source.zip.part04",
+          "size": 382603819,
+          "sha256": "85081bfc9a019c0d512571c390904cf20f1aa0ec5b7870cb822826a72bb92d0b"
+        }
+      ]
+    }
+  ]
+}
