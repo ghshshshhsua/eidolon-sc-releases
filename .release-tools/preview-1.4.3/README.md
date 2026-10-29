@@ -2,6 +2,8 @@
 
 這份修補接續既有 1.4.3 匯入修復、已簽署 APK、對應原始碼及 byte-delta 重建成果。它不重寫快取統計或匯入功能，也不重新編譯或重新簽名。提交修補、測試通過或執行 verify 均不代表 APK 已發佈。
 
+使用者已確認將 APK 與對應原始碼公開發佈至本倉庫。本次補齊 20 個 payload 分片，並加入限定於發佈分支的單次 push 入口：只有 `publish-request.json` 變更會觸發；其倉庫、版本、來源提交、payload SHA-256 與 publish 模式必須完全符合固定值。所有既有資產、簽名、正式通道及遠端摘要核驗均保留。發佈成功後移除這個單次工作流程。
+
 ## 固定輸入
 
 | 項目 | 固定值 |
@@ -22,12 +24,12 @@
 1. **既有 payload**：將已保存的 `publication-payload.zip` 按 `payload-descriptor.json` 拆為 `payload/part-000.bin` 到 `part-019.bin`，放在本目錄。修補只含程式碼與描述，沒有公開這些分片、APK 或對應原始碼。原 payload 為 10,311,109 bytes，SHA-256 `f106af8f710fd8b564fad60332e6cfd54679c9e9117efaaf1654651a506c198a`。分片須另經既有公開發佈授權程序後上傳；缺片時工作流程明確失敗，不建立草稿。
 2. **簽名**：此次使用已簽好的固定 APK，不需把簽名私鑰或密碼交給 Actions。工作流程以 `apksigner verify` 驗證新舊兩個 APK，兩者都必須只有上述同一憑證，並要求包名相同、版本從 142 增至 143、非 debuggable。憑證欄位不能代替驗證。如果重新編譯，必須持有原預覽版私鑰及密碼；不可新建金鑰冒充覆蓋升級包，也不可用正式版金鑰或 debug 金鑰。簽名失敗會停止。此修補沒有確認私鑰目前仍可取得。
 3. **GitHub 權限**：套用工作流程需能寫入此倉庫的分支與 `.github/workflows`（PAT／App 的 Contents: write 及所需 Workflows 權限）。執行者須能手動觸發 Actions；倉庫／組織政策須允許 release job 的 `GITHUB_TOKEN` 使用 `contents: write`，並允許建立此標籤和 Release。測試 job 只有 `contents: read`。不需私有來源倉庫 token，因輸入是固定且已核驗的對應原始碼包。
-4. **工作流程註冊**：將這個工作流程合併進預設 `main` 後，才會提供 `workflow_dispatch`。在 Actions 選擇 `codex/publish-1.4.3-preview` 分支執行；從其他分支手動執行會跳過 release job。保留該分支的發佈提交，重跑時必須使用同一提交。
+4. **工作流程啟動**：本次透過發佈分支的 `publish-request.json` push 啟動，無需修改 `main`。保留手動入口供將來註冊後使用；其他分支或事件不能發佈。保留該分支的發佈提交，重跑時必須使用同一提交。
 5. **Runner**：Ubuntu 24.04、Python 3.11+、Java、GitHub CLI、curl、Android SDK Build Tools 36.0.0，以及至少約 8 GB 可用空間。需要連至 GitHub API／release 資產網域及 Android SDK 下載站。建議預留 12 GB。工作流程會安裝核驗工具；工具不可用時停止，不能略過核驗。
 
 ## 操作與結果
 
-推送修補／建立 PR 只跑離線模擬測試。合併並準備好 payload 後，先手動選 `mode=verify`；成功時只輸出 `verified-only` 和 `published: false`，不呼叫任何 Release 寫入 API。確認完整核驗通過後才選 `mode=publish`。
+PR 執行離線模擬測試；本次已授權的發佈請求 push 在測試通過後執行完整資產核驗，全部通過才公開發佈。手動入口的 `mode=verify` 仍只輸出 `verified-only` 和 `published: false`，不呼叫任何 Release 寫入 API；`mode=publish` 才會發佈。
 
 也可以在已有檔案的受控環境核驗：
 
@@ -63,3 +65,4 @@ python3 -m unittest discover -s .release-tools/preview-1.4.3 -p 'test_*.py' -v
 上次匯入和應用回歸成果保留於來源提交的 `UPSTREAM-1.4.3.md`，這次沒有重做那些功能。尚未取得使用者的實際匯出包，不能認定格式差異是唯一匯入失敗原因。
 
 參考：[GitHub Release API](https://docs.github.com/en/rest/releases/releases)、[Release assets API](https://docs.github.com/en/rest/releases/assets)、[Android apksigner](https://developer.android.com/tools/apksigner)。
+

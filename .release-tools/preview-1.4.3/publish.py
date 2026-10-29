@@ -170,6 +170,27 @@ def publish(api, staging, expected, commit, notes):
     return {'status': 'published-and-verified', 'url': final['html_url'], 'assets': sorted(expected)}
 
 
+PUSH_REQUEST = {
+    'repository': REPO,
+    'version': '1.4.3-preview.1',
+    'sourceCommit': SOURCE_COMMIT,
+    'payloadSha256': 'f106af8f710fd8b564fad60332e6cfd54679c9e9117efaaf1654651a506c198a',
+    'mode': 'publish',
+}
+
+
+def publication_context(env, root=ROOT):
+    require(env.get('GITHUB_REPOSITORY') == REPO, 'Wrong workflow repository')
+    require(env.get('GITHUB_REF') == 'refs/heads/' + BRANCH, 'Wrong workflow branch')
+    event = env.get('GITHUB_EVENT_NAME')
+    require(event in ('workflow_dispatch', 'push'), 'Unsupported publication event')
+    if event == 'push':
+        request = Path(root) / 'publish-request.json'
+        require(request.is_file() and not request.is_symlink(), 'Missing publication request')
+        require(json.loads(request.read_text()) == PUSH_REQUEST, 'Unexpected publication request')
+    require(bool(env.get('GH_TOKEN')), 'Missing release token')
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--publish', action='store_true', help='Actually publish after all checks (default: verify only)')
@@ -178,10 +199,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     try:
         if args.publish:
-            require(os.environ.get('GITHUB_REPOSITORY') == REPO, 'Wrong workflow repository')
-            require(os.environ.get('GITHUB_REF') == 'refs/heads/' + BRANCH, 'Wrong workflow branch')
-            require(os.environ.get('GITHUB_EVENT_NAME') == 'workflow_dispatch', 'Manual dispatch required')
-            require(bool(os.environ.get('GH_TOKEN')), 'Missing release token')
+            publication_context(os.environ)
         if args.staging:
             require(args.baseline_dir is not None, '--baseline-dir required with --staging')
             staging, baseline = args.staging, args.baseline_dir
@@ -203,3 +221,4 @@ def main(argv=None):
 
 if __name__ == '__main__':
     sys.exit(main())
+

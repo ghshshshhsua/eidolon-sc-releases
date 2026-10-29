@@ -3,8 +3,7 @@ on:
   push:
     branches: [codex/publish-1.4.3-preview]
     paths:
-      - .github/workflows/publish-android-preview-143.yml
-      - .release-tools/preview-1.4.3/**
+      - .release-tools/preview-1.4.3/publish-request.json
   pull_request:
     paths:
       - .github/workflows/publish-android-preview-143.yml
@@ -20,7 +19,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: android-1.4.3-preview-${{ github.event_name == 'workflow_dispatch' && 'release' || github.ref }}
+  group: android-1.4.3-preview-release
   cancel-in-progress: false
 jobs:
   tests:
@@ -36,7 +35,7 @@ jobs:
   release:
     needs: tests
     if: >-
-      github.event_name == 'workflow_dispatch' &&
+      (github.event_name == 'workflow_dispatch' || github.event_name == 'push') &&
       github.repository == 'ghshshshhsua/eidolon-sc-releases' &&
       github.ref == 'refs/heads/codex/publish-1.4.3-preview'
     runs-on: ubuntu-24.04
@@ -66,7 +65,7 @@ jobs:
           echo "$ANDROID_HOME/build-tools/36.0.0" >> "$GITHUB_PATH"
       - name: Verify bytes, source, APK identity, signature and model separation
         env:
-          RELEASE_MODE: ${{ inputs.mode }}
+          RELEASE_MODE: ${{ github.event_name == 'push' && 'publish' || inputs.mode }}
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
@@ -76,3 +75,4 @@ jobs:
             publish) python3 .release-tools/preview-1.4.3/publish.py --publish ;;
             *) echo 'Unknown mode' >&2; exit 1 ;;
           esac
+
