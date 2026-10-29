@@ -130,6 +130,26 @@ class PublishTests(unittest.TestCase):
         self.run_release()
         self.assertEqual(len(self.api.mutations), count)
 
+    def test_actions_contents_scope_not_inferred_from_repository_role(self):
+        original = self.api.api
+        def api(path, method='GET', body=None):
+            if path == release.PREFIX and method == 'GET':
+                return {'full_name': common.REPO, 'private': False, 'permissions': {'push': False}}
+            return original(path, method, body)
+        self.api.api = api
+        self.assertEqual(self.run_release()['status'], 'published-and-verified')
+
+    def test_release_api_denied_scope_stops_publication(self):
+        original = self.api.api
+        def api(path, method='GET', body=None):
+            if path == release.PREFIX + '/releases' and method == 'POST':
+                raise RuntimeError('HTTP 403: Resource not accessible by integration')
+            return original(path, method, body)
+        self.api.api = api
+        with self.assertRaisesRegex(RuntimeError, '403'):
+            self.run_release()
+        self.assertIsNone(self.api.release)
+
     def test_resume_partial_draft_only_uploads_missing(self):
         self.api.seed([common.APK])
         self.run_release()
@@ -433,3 +453,4 @@ class VerificationTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+

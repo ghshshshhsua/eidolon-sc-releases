@@ -99,7 +99,8 @@ def publish(api, staging, expected, commit, notes):
     require(re.fullmatch(r'[0-9a-f]{40}', commit) is not None, 'Expected exact publication commit')
     repo = api.api(PREFIX)
     require(repo['full_name'] == REPO and repo['private'] is False, 'Wrong public release repository')
-    require(repo.get('permissions', {}).get('push', True), 'Token lacks repository write access')
+    # Repository role flags are not the contents scope of an Actions installation token.
+    # The release API enforces that scope; every failed request still stops publication.
     latest_id = api.api(LATEST)['id']
     guard_channels(api, latest_id)
     check_reused_models(api)
