@@ -1,0 +1,21 @@
+{
+  "version": "1.4.3-preview.1",
+  "upstreamCommit": "c4bd0b5b6a4c083ac4ddf93a736175e3a32bc8c2",
+  "files": [
+    {
+      "name": "Eidolon-SC-Android-1.4.3-preview.1.apk",
+      "size": 269854671,
+      "sha256": "fafd23b85ff76c66e35d4da1df6e49f27add08371e4a435b1496ded1af86db3e"
+    },
+    {
+      "name": "Eidolon-SC-1.4.3-preview.1-corresponding-source.zip",
+      "size": 1772827825,
+      "sha256": "6932d713e1811e976e08e3e7f03749cd479bdab8712510537a96e7f03cebfc15"
+    }
+  ],
+  "sourceRepository": "ghshshshhsua/eidolon-sc-client",
+  "sourceCommit": "4b70b8c62bbcfe2d5e6a86b42d352cd7e10a4321",
+  "package": "local.eidolon.sc.android.preview",
+  "versionCode": 143,
+  "signerSha256": "4c7ab53572c7ecc4b76517edf404a834bc955bd0b8bf9d5296a868e6045b1c31"
+}

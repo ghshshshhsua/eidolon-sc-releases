@@ -1,0 +1,78 @@
+name: Verify and publish Android 1.4.3 preview
+on:
+  push:
+    branches: [codex/publish-1.4.3-preview]
+    paths:
+      - .github/workflows/publish-android-preview-143.yml
+      - .release-tools/preview-1.4.3/**
+  pull_request:
+    paths:
+      - .github/workflows/publish-android-preview-143.yml
+      - .release-tools/preview-1.4.3/**
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Verify saved assets, or publish after verification
+        type: choice
+        options: [verify, publish]
+        default: verify
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: android-1.4.3-preview-${{ github.event_name == 'workflow_dispatch' && 'release' || github.ref }}
+  cancel-in-progress: false
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Check out the exact workflow commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Exercise release failure and resume paths without network access
+        run: python3 -m unittest discover -s .release-tools/preview-1.4.3 -p 'test_*.py' -v
+  release:
+    needs: tests
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      github.repository == 'ghshshshhsua/eidolon-sc-releases' &&
+      github.ref == 'refs/heads/codex/publish-1.4.3-preview'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    steps:
+      - name: Check out the exact publication commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Require the saved payload before downloading assets
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, sys
+          sys.path.insert(0, '.release-tools/preview-1.4.3')
+          from common import verify
+          root = pathlib.Path('.release-tools/preview-1.4.3')
+          for item in json.loads((root / 'payload-descriptor.json').read_text())['parts']:
+              verify(root / item['name'], item)
+          PY
+      - name: Install the APK verification tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'build-tools;36.0.0'
+          echo "$ANDROID_HOME/build-tools/36.0.0" >> "$GITHUB_PATH"
+      - name: Verify bytes, source, APK identity, signature and model separation
+        env:
+          RELEASE_MODE: ${{ inputs.mode }}
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "$RELEASE_MODE" in
+            verify) python3 .release-tools/preview-1.4.3/publish.py ;;
+            publish) python3 .release-tools/preview-1.4.3/publish.py --publish ;;
+            *) echo 'Unknown mode' >&2; exit 1 ;;
+          esac
