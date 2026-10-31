@@ -2,13 +2,13 @@
   "schema": 1,
   "platforms": {
     "android": {
-      "version": "1.4.3",
-      "versionCode": 143,
-      "tag": "v1.4.3",
-      "asset": "Eidolon-SC-Android-1.4.3.apk",
-      "size": 269838287,
-      "sha256": "93dbe9003b7873a2f6d7c0d546ce7e15cb826869a8fbe8a415e6de0c5ce5cec0",
-      "notes": "正式版整合快照功能与性能优化；修复大数据包导入卡住和主动搭话列表白屏。原正式版可覆盖安装保留数据；独立快照版请导出数据包再导入正式版。APK 约 270 MB，本地模型按需独立导入。"
+      "version": "1.4.4",
+      "versionCode": 146,
+      "tag": "v1.4.4",
+      "asset": "Eidolon-SC-Android-1.4.4.apk",
+      "size": 269842383,
+      "sha256": "a9eddef3379ec549bac9a20cf0adc93a6d1557512bedfc12da66bf13afa5fef7",
+      "notes": "新增可选角色记忆隔离与好感自由调控；优化按需检索和记忆合并，新增分项用量与参考费用。保留旧数据导入修复；正式版可覆盖升级。"
     },
     "windows": {
       "version": "0.7.1",
