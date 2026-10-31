@@ -29,3 +29,9 @@
 *.zip
 *.bundle
 *.db
+
+# Generated local test reports
+work/*-test-report.json
+!work/tests/fixtures/legacy-1.4.1.zip
+
+work/android-app/app/src/main/assets/web/

@@ -2,13 +2,13 @@
   "schema": 1,
   "platforms": {
     "android": {
-      "version": "1.4.1",
-      "versionCode": 141,
-      "tag": "v1.4.1",
-      "asset": "Eidolon-SC-Android-1.4.1.apk",
-      "size": 2016418850,
-      "sha256": "0d74da40356f0c0d3d007486cff62337f62e4e80c72895be2809f4017b11cd27",
-      "notes": "修复手机检查更新 HTTP 403：优先读取公开版本文件，API 作为备用并遵守限流等待；更新失败时仍可手动打开发布页。修复失败被缓存一天及检查过程缺少反馈的问题。"
+      "version": "1.4.3",
+      "versionCode": 143,
+      "tag": "v1.4.3",
+      "asset": "Eidolon-SC-Android-1.4.3.apk",
+      "size": 269838287,
+      "sha256": "93dbe9003b7873a2f6d7c0d546ce7e15cb826869a8fbe8a415e6de0c5ce5cec0",
+      "notes": "正式版整合快照功能与性能优化；修复大数据包导入卡住和主动搭话列表白屏。原正式版可覆盖安装保留数据；独立快照版请导出数据包再导入正式版。APK 约 270 MB，本地模型按需独立导入。"
     },
     "windows": {
       "version": "0.7.1",
