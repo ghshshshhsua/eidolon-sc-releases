@@ -2,13 +2,13 @@
   "schema": 1,
   "platforms": {
     "android": {
-      "version": "1.4.4",
-      "versionCode": 146,
-      "tag": "v1.4.4",
-      "asset": "Eidolon-SC-Android-1.4.4.apk",
+      "version": "1.4.5",
+      "versionCode": 148,
+      "tag": "v1.4.5",
+      "asset": "Eidolon-SC-Android-1.4.5.apk",
       "size": 269842383,
-      "sha256": "a9eddef3379ec549bac9a20cf0adc93a6d1557512bedfc12da66bf13afa5fef7",
-      "notes": "新增可选角色记忆隔离与好感自由调控；优化按需检索和记忆合并，新增分项用量与参考费用。保留旧数据导入修复；正式版可覆盖升级。"
+      "sha256": "6dbd87c889421660f67a610667cf900e84b488c7c1cb0ba7db10815c458c7555",
+      "notes": "修复导入后白屏、已有记录导致对话无法打开；兼容已导入存档，补充真实历史入口和数据完整性验证。请直接覆盖安装，勿卸载或清除数据。"
     },
     "windows": {
       "version": "0.7.1",
