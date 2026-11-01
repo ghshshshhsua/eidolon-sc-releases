@@ -2,13 +2,13 @@
   "schema": 1,
   "platforms": {
     "android": {
-      "version": "1.4.5",
-      "versionCode": 148,
-      "tag": "v1.4.5",
-      "asset": "Eidolon-SC-Android-1.4.5.apk",
+      "version": "1.4.6",
+      "versionCode": 150,
+      "tag": "v1.4.6",
+      "asset": "Eidolon-SC-Android-1.4.6.apk",
       "size": 269842383,
-      "sha256": "6dbd87c889421660f67a610667cf900e84b488c7c1cb0ba7db10815c458c7555",
-      "notes": "修复导入后白屏、已有记录导致对话无法打开；兼容已导入存档，补充真实历史入口和数据完整性验证。请直接覆盖安装，勿卸载或清除数据。"
+      "sha256": "373fccd5db4be9083fd151d1366314d51183ad5990d0d64943b35fb223d2b503",
+      "notes": "修复沿用聊天 API 的判断故障与好感度无法增长；完善故障提示、45 秒判断及 90 秒记忆超时恢复。请直接覆盖安装，勿卸载或清除数据。"
     },
     "windows": {
       "version": "0.7.1",
