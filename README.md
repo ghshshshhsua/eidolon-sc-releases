@@ -2,6 +2,18 @@
 
 基于 [Sallyn0225/eidolon-sc](https://github.com/Sallyn0225/eidolon-sc) 改编的非官方角色聊天客户端，让《偶像大师 闪耀色彩》的角色对话在本机继续。提供 Android 独立应用与 Windows 桌面适配；聊天使用自己的 API，本地保存记录、档案和长期记忆。
 
+## Android 1.4.6 判断故障与好感度修复
+
+修复沿用 DeepSeek 官方聊天 API 时判断输出不完整、服务报故障及好感度无法增长的问题。判断和记忆整理单独使用结构化输出参数，不修改聊天设置；保留每日增长上限、手动锁定和自由调控规则。
+
+失败原因会显示在设置中，本地跳过模型不再错误清除故障。云端判断请求上限为 45 秒，记忆整理上限为 90 秒，支持取消和下一次请求恢复。
+
+内部版本号 150，包名和签名不变，可覆盖正式旧版及 1.4.6 本地测试包（149）。请勿先卸载或清除数据；可选模型包无需重下，Windows 本次不更新。
+
+已通过逻辑和界面回归、Android 35 / WebView 124 模拟器的 29 位角色页面、导入和历史页面、判断与超时恢复、原生录音启停、离线语音识别；使用合成语句实际验证 DeepSeek 聊天／判断／记忆／云端检索、Fish Audio 合成及安卓播放。未使用个人聊天或备份。实体手机、云端 ASR 服务和主观音色相似度未验证；保留第三方 ONNX Runtime Extensions 的 16 KB 内存页兼容限制。
+
+新增回归：`node work/test-judgment-api.cjs`、`node work/test-judgment-recheck.cjs`、`node work/test-judgment-deadline.cjs`、`node work/test-judgment-guard-ui.cjs`。
+
 ## Android 1.4.5 导入与白屏修复
 
 修复数据包中送礼、挂断、结束事件携带空日期时导致对话列表、当前对话或历史对话白屏的问题。读取时兼容已经导入的旧记录，覆盖安装无需删除数据或重新导入。
