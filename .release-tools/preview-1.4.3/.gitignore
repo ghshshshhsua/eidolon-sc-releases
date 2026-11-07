@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+payload.zip
+staging/
+baseline/
+*.partial
