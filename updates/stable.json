@@ -2,13 +2,13 @@
   "schema": 1,
   "platforms": {
     "android": {
-      "version": "1.4.6",
-      "versionCode": 150,
-      "tag": "v1.4.6",
-      "asset": "Eidolon-SC-Android-1.4.6.apk",
-      "size": 269842383,
-      "sha256": "373fccd5db4be9083fd151d1366314d51183ad5990d0d64943b35fb223d2b503",
-      "notes": "修复沿用聊天 API 的判断故障与好感度无法增长；完善故障提示、45 秒判断及 90 秒记忆超时恢复。请直接覆盖安装，勿卸载或清除数据。"
+      "version": "1.4.7",
+      "versionCode": 151,
+      "tag": "v1.4.7",
+      "asset": "Eidolon-SC-Android-1.4.7.apk",
+      "size": 269846479,
+      "sha256": "9fed4568a3d5fa5133e04778ea8bec42c97737076bb6b623a55d1377fa49724e",
+      "notes": "优化后台返回与历史缓存，新增缓存诊断，减少重复检索和剧情查询失败。请直接覆盖安装，勿卸载或清除数据。"
     },
     "windows": {
       "version": "0.7.1",
